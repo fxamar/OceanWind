@@ -1,0 +1,42 @@
+create folder name for App
+py -m venv venv
+or py -3 -m venv .venv
+C:\Users\Yasser\Documents\PythonApps\erpflex_venv\Scripts\activate.ps1
+
+
+  python -m pip install --upgrade pip
+
+  python -m pip install django
+
+  django-admin startproject core .  
+
+  pip install -r requirements.txt 
+  python manage.py makemigrations
+
+  python manage.py migrate
+  py setup.py install
+  python manage.py runserver
+  
+python manage.py runserver 192.168.1.9:8000
+python manage.py startapp yourApp
+
+pip install django-jet
+
+....................
+in setting.py add 
+
+INSTALLED_APPS = (
+    ...
+    'jet',
+    'django.contrib.admin',
+)
+
+
+
+
+
+
+
+
+
+
