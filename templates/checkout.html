@@ -1,0 +1,145 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+  {% comment %} <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  </style>
+} {% endcomment %}
+
+
+  
+
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="{% static 'images/icons/2.png' %}" alt="" width="100" height="100">
+      <p style="color: black; "><b style="font-size: 32px;">	واجهة بيانات عنوان توصيل الطلبية   </b></p>
+    <p > </p>
+    <p class="lead">   بيانات عنوان الزبون لأستلام الطلبية المطلوبة </p>
+  </div>
+
+  {% comment %} <div class="row"> {% endcomment %}
+
+
+    <div  class="t-center p-l-15 p-r-15 card" >
+      <h4 class="mb-3 text-center" style="margin-top: 26px;">عنوان توصيل الطلبية</h4>
+      <form  style="margin-bottom: 26px;"  dir='RTL'  method="POST" class="needs-validation" >
+        {% csrf_token %}  
+        <div class="mb-3 text-right">
+          <label for="street_address">العنوان</label>
+          {{ form.street_address }}
+          <div class="invalid-feedback">
+            الرجاء كتابة العنوان مطلوب.
+          </div>
+        </div>
+
+        <div class="mb-3 text-right">
+          <label for="apartment_address">العنوان 2 <span class="text-muted">(اختياري)</span></label>
+          {{ form.apartment_address }}
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3 text-right">
+            <label for="country">الدولة</label>
+            {{ form.country }}
+            <div class="invalid-feedback">
+              الرجاء تحديد دولة صالحة.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3 text-right">
+            <label for="city">المدينة</label>
+            {{ form.city }}
+            <div class="invalid-feedback">
+              اسم المدينة مطلوب.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3 text-right">
+            <label for="phone">رقم الهاتف </label>
+            {{ form.phone }}
+            <div class="invalid-feedback">
+              رقم الهاتف مطلوب.
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+        {% comment %} <div class="custom-control custom-checkbox"> {% endcomment %}
+          {% comment %} <input {% if form.same_shipping_address.value %}checked{% endif %} type="checkbox" class="custom-control-input" id="same_shipping_address"> {% endcomment %}
+          
+          {% comment %} <label class="custom-control-label" for="same_shipping_address">عنوان التوصيل هو نفسه عنوان إرسال الطلبية الخاص بي.</label> {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+        
+        <div class="col-md-4 mb-2 text-right">
+          <label for="gps"> احداثيات الموقع </label>
+          {{ form.gps }}
+          {% comment %} <div class="invalid-feedback"> {% endcomment %}
+            {% comment %} احداثيات الموقع مطلوب. {% endcomment %}
+          {% comment %} </div> {% endcomment %}
+        </div>
+        <div  class="col-md-5 text-right">
+          {% comment %} <input {% if form.save_info.value %}checked{% endif %} type="checkbox" class="custom-control-input" id="save-info"> {% endcomment %}
+          {{ form.save_info }}
+          <label  >احفظ هذه المعلومات في المرة القادمة</label>
+        </div>
+      
+        {% comment %} <hr class="mb-4"> {% endcomment %}
+
+        {% comment %} <h4 class="mb-3">دفع</h4> {% endcomment %}
+
+        {% comment %} <div class="d-block my-3">
+        {% for value, name in form.fields.address_type.choices %}
+          <div class="custom-control custom-radio">
+            <input id="{{ name }}" name="address_type" value="{{ value }}" type="radio" class="custom-control-input"  required>
+            <label class="custom-control-label" for="{{name}}">{{ name }}</label>
+          </div>
+          {% endfor %}
+          <hr class="mb-4">
+        </div> {% endcomment %}
+        
+        <button style="margin-bottom: 26px;" class="btn btn-primary btn-lg" type="submit">  تاكيد حفظ الطلبية </button>
+      </form>
+    </div>
+
+    {% comment %} {% include "order_snippet.html" %} {% endcomment %}
+
+
+
+  {% comment %} <footer class="my-5 pt-5 text-muted text-center text-small">
+    {% comment %} <p class="mb-1">&copy; 2022-1444 موقع الكتروني للتسويق</p> {% endcomment %}
+    {% comment %} <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">خصوصية</a></li>
+      <li class="list-inline-item"><a href="#">شروط</a></li>
+      <li class="list-inline-item"><a href="#">الدعم</a></li>
+    </ul>
+  </footer>   {% endcomment %}
+</div>
+{% endblock content %}

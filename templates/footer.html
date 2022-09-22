@@ -1,0 +1,119 @@
+{% load static %}
+<!-- ------------------------------footer sub end---------------------------------- -->
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Abel|Lato|Open+Sans&display=swap" rel="stylesheet">
+<style>
+  
+    /* footer */
+#footer-main{
+	background: #000;
+	color: white;
+	font-size: 0.8rem;
+	padding: 2.5rem 0;
+    font-family: 'Lato', sans-serif;
+}
+
+#footer-main a{
+	font-size: 14px;
+	display: block;
+	margin: 0.3rem;
+	color: grey;
+}
+
+#footer-main a:hover{
+	font-weight: bold;
+	color: white;
+}
+
+#footer-main h6 a{
+    color: white;
+
+    
+}
+
+
+
+#footer-main hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid white;
+}
+
+#footer-main img{
+	margin-right: 0.6rem;
+}
+</style>
+
+<footer  dir='rtl' id="footer-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+            {% comment %} <br> {% endcomment %}
+            {% comment %} <h6 class="mt-3"><a href="">ابحث عن متجر</a></h6> {% endcomment %}
+            <h6 class="mt-3"><a class="nav-link " href="{% url 'register' %}">الاشتراك في رياح المحيط</a></h6>
+            <h6 class="mt-3"><a href="{% url 'login' %}">تسجيل الدخول</h6>
+            <h6 class="mt-3"><a href="/admin/">تسجيل الدخول لأدارة الموقع</a></h6>
+        </div>
+        <div class="col-sm-3">
+            <h6 class="mt-3"><a href="">احصل على مساعدة</a></h6>
+            <a href="">حالة الطلب</a>
+            {% comment %} <a href="">الشحن والتسليم</a> {% endcomment %}
+            {% comment %} <a href="">مرتجع</a> {% endcomment %}
+            {% comment %} <a href="">خيارات الدفع</a> {% endcomment %}
+            <a href="">اتصل بنا</a>
+        </div>
+        <div class="col-sm-3">
+            <h6 class="mt-3"><a href="">معلومات عن الموقع</a></h6>
+            <a href="">الاخبار</a>
+            {% comment %} <a href="">وظائف</a> {% endcomment %}
+            <a href="">المستثمرون</a>
+            {% comment %} <a href="">الاستدامة</a> {% endcomment %}
+
+        </div>
+        <div class="col-sm-3">
+          <a href="">صوت العملاء</a>
+          {% comment %} <a href="">جهات الاتصال حسب الفرع</a> {% endcomment %}
+          {% comment %} <a href="">الإبلاغ عن الأخلاق</a> {% endcomment %}
+          <a href="">وظائف</a>
+          {% comment %} <br><br> {% endcomment %}
+          <a href="">تحقيق الأعمال</a>
+          {% comment %} <br> {% endcomment %}
+          {% comment %} <a href="" class="ico"><i class="fab fa-apple fa-2x"></i> Apple Store</a> {% endcomment %}
+          {% comment %} <a href="" class="ico"><i class="fab fa-google-play fa-2x"></i> Google Play</a> {% endcomment %}
+        </div>
+        <div class="flex-m p-t-30">
+          للتواصل معنا عبر وسائل التواصل الاجتماعي
+          <a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+          <a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+          <a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
+          <a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
+          <a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+        </div>
+      
+      </div>
+      <hr>
+      <div class="row">
+        {% comment %} <div class="col-sm-6">
+          
+        </div> {% endcomment %}
+        {% comment %} <div class="col-sm-6">
+          
+        </div> {% endcomment %}
+        <hr>
+        {% comment %} <a  {% endcomment %}
+        {% comment %} href="https://github.com/zinmyoswe"  {% endcomment %}
+        {% comment %} style="margin-left: 1rem">جميع الحقوق محفوظة  | amar560981@gmail.com 2022-1444</a> {% endcomment %}
+      
+      
+      </div>
+      <div class="t-center p-l-15 p-r-15">
+        <div class="t-center s-text8 p-t-20">
+          حقوق النشر : جميع الحقوق محفوظة لدى شركة اي تك للبرمجيات  &copy;  2022  <i class="fa fa-heart-o" aria-hidden="true"></i><p> للتواصل معنا عبر الايميل  amar560981@gmail.com </p><a href="" target="_blank">جوال  715935666</a>
+        </div>
+      </div>
+    </div>
+  
+  </footer>
+<!-- ------------------------------footer end---------------------------------- -->
+

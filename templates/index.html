@@ -1,0 +1,656 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category_template_tags %}
+{% load slide_template_tags %}
+{% block content %}
+<style>
+	/*[ Block2 ]
+///////////////////////////////////////////////////////////
+*/
+.block2-labelpromotion::before,
+.block2-labelsale::before,
+.block2-labelLimit::before,
+.block2-labelnew::before 
+{
+  z-index: 100;
+  font-family: Montserrat-Regular;
+  font-size: 12px;
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 22px;
+  border-radius: 11px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.block2-labelsale::before {
+  background-color: #088331;
+  {% comment %} color: #088331; {% endcomment %}
+  content: 'للبيع';
+}
+
+.block2-labelnew::before {
+  background-color:  #007bff;
+  content: 'جديد';
+}
+
+.block2-labelpromotion::before{
+	background-color: #000;
+	content: 'الكمية محدودة';
+	width: 70px;
+  }
+.block2-labelLimit::before{
+	background-color: #e65540;
+	content: 'الكمية محدودة';
+	width: 70px;
+  }
+
+  .btn-dark {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-outline-dark {
+    color: #000;
+    border-color: #000;
+}
+
+
+</style>
+
+	<!-- Slide1 -->
+	<section class="slide1">
+		
+		<div class="wrap-slick1">
+			<div class="slick1">
+
+				{% slides %}
+
+			{% comment %} <div class="item-slick1 item2-slick1" style="background-image: url({% static 'images/kr_slide_add_2.jpg' %});">
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
+							Women Collection 2018
+						</span>
+						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
+							New arrivals
+						</h2>
+						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+							&lt;!&ndash; Button &ndash;&gt;
+							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								تسوق الآن
+							</a>
+						</div>
+					</div>
+				</div>  {% endcomment %}
+
+			</div>
+		</div>
+	</section>
+
+	<!-- Category start -->
+	<style>
+		.hov1{
+			background-color: white !important;
+			color: black !important;
+			
+		}
+	</style>
+	<section class="banner bgwhite p-t-40 p-b-40">
+		<div class="container">
+			<div class="row">
+
+						{% categories_div %}
+
+				{% comment %} <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+					
+					<div class="block1 hov-img-zoom pos-relative m-b-30">
+						<img src="{% static 'images/banner-02.webp' %}" alt="IMG-BENNER">
+						<div class="block1-wrapbtn w-size2">
+							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Dresses
+							</a>
+						</div>
+					</div>
+					
+					<div class="block1 hov-img-zoom pos-relative m-b-30">
+						<img src="{% static 'images/banner-05.webp' %}" alt="IMG-BENNER">
+						<div class="block1-wrapbtn w-size2">
+							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Sunglasses
+							</a>
+						</div>
+					</div>
+				</div> {% endcomment %}
+
+
+			</div>
+		</div>
+	</section>
+
+	<!-- New Product -->
+	<style>
+		.newproduct{
+			margin-bottom: 2px;
+			padding-bottom: 2px;
+		}
+	</style>
+	<section class="newproduct bgwhite p-t-45 p-b-105">
+		<div class="container">
+			<div class="sec-title p-b-60">
+				<h3 class="m-text5 t-center">
+					منتجات مميزة
+				</h3>
+			</div>
+
+			<!-- Slide2 -->
+			<div class="wrap-slick2">
+				<div class="slick2">
+
+					{% for item in object_list %}
+					
+					<div class="item-slick2 p-l-15 p-r-15">
+						<!-- Block2 -->
+						<div class="block2">
+							
+							<a href="{{item.get_absolute_url}}">
+								<img src="{{ item.image.url }}" alt="IMG-PRODUCT" style="height: 370px; width:100%; ">
+							</a>
+							{% comment %} <div class="block2-img wrap-pic-w of-hidden pos-relative block2-label{{item.get_label_display}}">
+								<div class="block2-overlay trans-0-4">
+									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+									</a>
+
+								</div>  
+							</div> {% endcomment %}
+							
+
+							<div class="block2-txt p-t-20">
+								<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5" style="color: black;">
+									{{ item.title }}
+								</a>
+								{% if item.discount_price %}
+								<span class="block2-oldprice m-text7 p-r-5" style="color: black;">
+									${{ item.price }}
+								</span>
+								<span class="block2-newprice m-text8 p-r-5">
+									${{ item.discount_price }}
+								</span>
+								{% else %}
+								<span class="block2-price m-text6 p-r-5" style="color: black;">
+									${{ item.price }}
+								</span>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% comment %} <section class="bgwhite p-t-45 p-b-58">
+	<div class="container">
+		<div class="sec-title p-b-22">
+			<h3 class="m-text5 t-center">
+		Our Products
+			</h3>
+		</div>
+		
+		<div class="tab01">
+		
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab" aria-expanded="true">جديد</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#sale" role="tab" aria-expanded="false">للبيع</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#Limit" role="tab" aria-expanded="false">الكمية محدودة</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#top-rate" role="tab" aria-expanded="false">Top Rate</a>
+			</li>
+		</ul>
+		
+		{% for item in object_list %}
+		<div class="tab-content p-t-35">
+		
+			{% if item.get_label_display == 'new' %}
+			<div class="tab-pane fade active show" id="best-seller" role="tabpanel" aria-expanded="true">
+				<div class="row">
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+							<div class="block2">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+									<img src="{{item.image.url}}" alt="IMG-PRODUCT" data-pagespeed-url-hash="508358545" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+									<div class="block2-overlay trans-0-4">
+										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+										</a>
+										<div class="block2-btn-addcart w-size1 trans-0-4">
+											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+												Add to Cart
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="block2-txt p-t-20">
+									<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+										{{item.get_label_display}}
+									</a>
+									<span class="block2-price m-text6 p-r-5">
+										{{item.price}}  {{item.discount_price}}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% elif item.get_label_display == 'sale' %}
+			<div class="tab-pane fade" id="sale" role="tabpanel" aria-expanded="false">
+				<div class="row">
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+							<div class="block2">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+									<img src="{{item.image.url}}" alt="IMG-PRODUCT" data-pagespeed-url-hash="508358545" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+									<div class="block2-overlay trans-0-4">
+										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+										</a>
+										<div class="block2-btn-addcart w-size1 trans-0-4">
+											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+												Add to Cart
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="block2-txt p-t-20">
+									<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+										{{item.get_label_display}}
+									</a>
+									<span class="block2-price m-text6 p-r-5">
+										{{item.price}}  {{item.discount_price}}
+									</span>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+			{% elif item.get_label_display == 'Limit' %}
+			<div  class="tab-pane fade" id="Limit" role="tabpanel" aria-expanded="false">
+				<div class="row">
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+							<div class="block2">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelLimit">
+									<img src="{{item.image.url}}" alt="IMG-PRODUCT" data-pagespeed-url-hash="508358545" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+									<div class="block2-overlay trans-0-4">
+										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+										</a>
+										<div class="block2-btn-addcart w-size1 trans-0-4">
+											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+												Add to Cart
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="block2-txt p-t-20">
+									<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+										{{item.get_label_display}}
+									</a>
+									<span class="block2-price m-text6 p-r-5">
+										{{item.price}}  {{item.discount_price}}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{%endif%}
+			</div>
+		{%endfor%}
+	</div>
+</section>
+{% endcomment %}
+
+
+	<!-- ------------------Banner2  start ------------------------>
+	<style>
+		.banner2{
+			background-color: #fff;
+			margin-right: 1rem;
+			margin-left: 1rem;
+			margin-bottom: 0 !important;
+			padding-bottom: 0 !important;
+		}
+
+		.ban_img{
+			height: 680px;
+			width: 100%;
+		}
+		.ban5_img{
+			height: 580px;
+			width: 100%;
+		}
+
+		.btn-light {
+			color: #000;
+			background-color: #fff;
+			border-color: #fff;
+			border-radius: 20px;
+		}
+		.wrap-btn-slide1 a:hover{
+			background-color: whitesmoke;
+			color: #000 !important;
+			opacity: 0.7;
+	
+		}
+	</style>
+
+	{% comment %} <section class="banner2 bg5 p-t-55 p-b-55">
+		<h4 style="font-weight: 500;">أساسيات الموسم</h4>
+		<div class="">
+			<div class="row">
+				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_700,c_limit/c85699cb-2813-4acd-8822-c3344fe07f17/nike-just-do-it.jpg" alt="IMG-BANNER" class="ban_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<span class="m-text9 p-t-45 fs-20-sm">
+								تبدو جريئة ، مشرقة
+							</span>
+
+							<br>
+							
+
+								<div class="wrap-btn-slide1 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite  trans-0-4">
+								تسوق الآن
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_700,c_limit/3d8a771b-0fd0-49b0-a9ad-1c688b192bf9/nike-just-do-it.jpg"  alt="IMG-BANNER" class="ban_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<span class="m-text9 p-t-45 fs-20-sm">
+								ابق نشطًا
+							</span>
+
+							<br>
+							
+
+								<div class="wrap-btn-slide1 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite  trans-0-4">
+								تسوق الآن
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+
+			
+			</div>
+		</div>
+	</section> {% endcomment %}
+	<!-- ------------------Banner2  start ------------------------>
+
+	<!-- ------------------Banner4  start ------------------------>
+<!-- Slide1 -->
+
+<style>
+	.slide1 button:hover{
+		background-color: white !important;
+		color: black;
+	}
+</style>
+<br><br>
+{% comment %} <section class="slide1">
+
+	
+	<div class="wrap-slick2">
+		<div class="slick1">
+
+			<div class="item-slick1 item2-slick1" style="background-image: url('https://static.nike.com/a/images/f_auto/dpr_2.0/w_1407,c_limit/a01665bf-08e7-4d5d-8fb6-841382e3f900/nike-just-do-it.jpg');">
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+						<span class="caption1-slide1 m-text1 t-center   m-b-15" data-appear="rollIn">
+							Nike ZoomX Vaporfly NEXT%
+						</span>
+						<h2 class="caption2-slide1 xl-text1 t-center   m-b-37" data-appear="lightSpeedIn">
+							عودة سريعة
+						</h2>
+						<div class="wrap-btn-slide1 w-size1 " data-appear="slideInUp">
+							
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								تسوق الآن
+							</a>
+						</div>
+					</div>
+				</div>
+
+		</div>
+	</div>
+</section> {% endcomment %}
+
+<!-- ------------------Banner4  end ------------------------>
+
+	<!-- ------------------Banner3  start ------------------------>
+
+	{% comment %} <section class="banner2 bg5 p-t-55 p-b-55">
+		<h4 style="font-weight: 500;">أساسيات التدريب</h4>
+		<div class="">
+			<div class="row">
+				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_700,c_limit/24fb4f53-ba07-46fa-934e-bcb35b0cc021/nike-just-do-it.jpg" alt="IMG-BANNER" class="ban_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<span class="m-text9 p-t-45 fs-20-sm">
+								SuperRe Go
+							</span>
+
+							<br>
+							
+
+								<div class="wrap-btn-slide1 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite  trans-0-4">
+								تسوق الآن
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_700,c_limit/f33275db-0cbb-406a-8ac9-430ff07433b7/nike-just-do-it.jpg"  alt="IMG-BANNER" class="ban_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<span class="m-text9 p-t-45 fs-20-sm" style="color: black;">
+								حمالات صدر وطماق
+							</span>
+
+							<br>
+							
+
+								<div class="wrap-btn-slide2 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2  trans-0-4" style="background-color: black; color:white;">
+								تسوق الآن
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+
+			
+			</div>
+		</div>
+	</section> {% endcomment %}
+	<!-- ------------------Banner3  end ------------------------>
+
+	<!-- ------------------Banner5  start ------------------------>
+
+	{% comment %} <section class="banner2 bg5 p-t-55 p-b-55">
+		<h4 style="font-weight: 500;">المزيد من المنتجات</h4>
+		<div class="">
+			<div class="row">
+				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_573,c_limit/0bafb728-2ae2-416f-bb18-5935801c8071/nike-just-do-it.png" alt="IMG-BANNER" class="ban5_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+						
+							
+
+							<br>
+							
+
+								<div class="wrap-btn-slide1 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite  trans-0-4">
+								رجالي
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_573,c_limit/2c8754ce-6287-4e77-a198-1ad483fba257/nike-just-do-it.png" alt="IMG-BANNER" class="ban5_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+
+							<br>
+							
+
+								<div class="wrap-btn-slide1 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite  trans-0-4">
+								نساء
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto p-t-15 p-b-15">
+					<div class="pos-relative">
+						<img src="https://static.nike.com/a/images/f_auto/dpr_2.0/h_573,c_limit/414db494-7ebc-4d53-bbff-58d50b380a24/nike-just-do-it.png" alt="IMG-BANNER" class="ban5_img">
+
+						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+							<br><br><br><br><br>
+
+							<br>
+							
+
+								<div class="wrap-btn-slide1 w-size1 animated" data-appear="slideInUp">
+						
+							<a href="/shop/" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite  trans-0-4">
+								اطفال
+							</a>
+						</div>
+
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</section> {% endcomment %}
+	<!-- ------------------Banner2  start ------------------------>
+
+
+	
+	
+{% comment %} 
+	<!-- Shipping -->
+	<section class="shipping bgwhite p-t-62 p-b-46">
+		<div class="flex-w p-l-15 p-r-15">
+			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
+				<h4 class="m-text12 t-center">
+					التوصيل المجاني في جميع أنحاء العالم
+				</h4>
+
+				<a href="#" class="s-text11 t-center">
+					انقر هنا لمزيد من المعلومات
+				</a>
+			</div>
+
+			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 bo2 respon2">
+				<h4 class="m-text12 t-center">
+					30 يوم للإرجاع
+				</h4>
+
+				<span class="s-text11 t-center">
+					ما عليك سوى إعادته في غضون 30 يومًا للاستبدال.
+				</span>
+			</div>
+
+			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
+				<h4 class="m-text12 t-center">
+					افتتاح المتجر
+				</h4>
+
+				<span class="s-text11 t-center">
+					المتجر مفتوح  24 ساعة طوال ايام الاسبوع
+				</span>
+			</div>
+		</div>
+	</section>
+{% endcomment %}
+
+
+
+	
+
+	{% endblock content %}
+
+
+	

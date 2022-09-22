@@ -1,0 +1,119 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 style="margin-top: 26px; margin-bottom: 26px;"  class="text-center">ملخص قائمة الطلبات</h2>
+      <div dir='rtl' class="container-table-cart pos-relative">
+        <div dir='rtl' class="wrap-table-shopping-cart bgwhite">
+          <table dir='rtl' class="table">
+            <thead> 
+              <tr class="table-head  text-center">
+                <th  class="column-1" scope="col">م</th>
+                <th class="column-2" scope="col">الصورة</th>
+                <th class="column-3" scope="col">اسم المنتج</th>
+                <th class="column-4" scope="col">السعر</th>
+                <th class="column-5 p-l-70" scope="col">الكمية</th>
+                <th class="column-6" scope="col">الحجم</th>
+                <th class="column-7" scope="col">اجمالي السعر</th>
+              </tr>
+            </thead>
+            <tbody  class="text-center">
+              {% for order_item in object.items.all %}
+                <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                  <td>
+			              <img src="{{ order_item.item.image.url }}" style="width: 130px;"> 
+                  </td>
+                  <td>{{ order_item.item.title }}</td>
+                <td>{{ order_item.item.price }}</td>
+                <td>
+            	    <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-3"></i></a>
+            	    {{ order_item.quantity }}
+                  {% comment %} <a href=""  onclick="this.href='{% url 'core:add-to-cart' order_item.item.slug %}?sizeItemss=${order_item.sizeItem}'" class="btn btn-primary" style="margin: 2px;">أضف إلى عربة التسوق</a> {% endcomment %}
+            	    {% if order_item.sizeItem%}
+                  <a href=""  onclick="this.href='{% url 'core:add-to-cart' order_item.item.slug %}?sizeItemss={{ order_item.sizeItem.id }}'" ><i class="fas fa-plus ml-3"></i></a>
+                  {% else %}
+                  <a href="{% url 'core:add-to-cart' order_item.item.slug %}" ><i class="fas fa-plus ml-3"></i></a>
+                  {% endif %}
+                  
+                  
+                </td>
+                <td>
+                  <div class="rs2-select2 rs3-select2 w-size16">
+                    {% comment %} <select class="custom-select custom-select-sm"> {% endcomment %}
+                      {% comment %} <option>إختر من القائمة</option>
+                      {% for size in order_item.get_sizeItem %}
+                          <option value="{{ size.id }}" {% if order_item.sizeItem.id == size.id %} selected  {% endif %}>{{ size }}</option>
+                      {% endfor %}
+                    </select> {% endcomment %}
+
+                    {{ order_item.sizeItem }}
+
+                    {% comment %} <select class="form-control" name="size" select={{ order_item.sizeItem }} value={{ order_item.sizeItem }}>
+                      <option>إختر من القائمة</option>
+                      {% for id, name in form.fields.assigned_employee.choices %}
+                        <option value="{{ id }}"{% if form.fields.assigned_employee.value == id %} selected{% endif %}>{{ name }}</option>
+                      {% endfor %}
+
+
+                      {% for sizeItem  in order_item.get_sizeItem %}
+                        <option>{{ sizeItem }}</option>
+                      {% endfor %}
+                    </select> {% endcomment %}
+                  </div>
+                  
+                  
+                  {% comment %} {{ order_item.get_sizeItem }} {% endcomment %}
+                </td>
+                <td>
+                  {% if order_item.item.discount_price %}
+                    ${{ order_item.get_total_discount_item_price}}
+                    <span class="badge badge-primary">  الخصم المكتسب ${{ order_item.get_amount_saved }}</span>
+                  {% else %}
+                    ${{ order_item.get_total_item_price}}
+                  {% endif %}
+                </td>
+                <td>
+                  <a style="color: red" href="{% url 'core:remove-from-cart' order_item.item.slug %}">
+                    <i class="fas fa-trash float-right"></i>
+                  </a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+			          <td colspan="5">عربة التسوق فارغة</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+            {% comment %} {% if object.coupon %}
+              <tr>
+                <td colspan="5"><b>قسيمة : </b></td>
+                <td>- ${{ object.coupon.amount }}</td>
+              </tr>
+            {% endif%} {% endcomment %}
+            {% if object.get_total %}
+              <tr>
+        	      <td colspan="5"><b>اجمالي الطلب الكلي:    {{ object.get_total }} $</b></td>
+              </tr>
+              <tr>
+        	      <td colspan="5">
+        		      <a href="/checkout" class="btn btn-warning float-right ml-2">تاكيد الطلب</a>
+        		      <a href="/" class="btn btn-primary float-right">مواصلة التسوق</a>
+        	      </td>
+              </tr>
+            {% endif %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

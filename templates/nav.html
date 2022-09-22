@@ -1,0 +1,364 @@
+{% load static %}
+{% load cart_template_tags %}
+{% load category_template_tags %}
+
+<style>
+	.topbar {
+		background-color: white;
+		color: black !important;
+	}
+	.topbar a:hover{
+		color: black;
+	}
+</style>
+<!-- Header -->
+<header lang="ar" dir="rtl"   class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			
+			<div class="topbar">
+				<a href="/" class="header-wrapicon1 dis-block">
+					<p style="color: black; "><b style="font-size: 22px;">	رياح المحيط   </b>اول سوق الكتروني في اليمن لبيع الاجهزة الطبية</p>
+						{% comment %} D</b>JANGO SHOP</p> {% endcomment %}
+				</a>
+					<span class="linedivide1"></span>
+				<a href="/"  class="topbar-email">
+					<img src="{% static 'images/icons/logo.png' %}" alt="IMG-LOGO">
+				</a>
+				<span class="linedivide1"></span>
+				<span class="topbar-child1">
+					{% comment %} شحن مجاني للطلبات القياسية التي تزيد عن دولار {% endcomment %}
+					<div class="topbar">
+						<a href="#" class="topbar-social-item fab fa-facebook"></a>
+						<a href="#" class="topbar-social-item fab fa-instagram"></a>
+						<a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
+						<a href="#" class="topbar-social-item fab fa-twitter"></a>
+						<a href="#" class="topbar-social-item fab fa-youtube"></a>
+					</div>
+					
+				</span>
+				
+				<div  class="logo">
+					<span class="topbar-email">
+							<a href="{% url 'logout' %}" class="header-wrapicon1 dis-block">
+								{% if request.user.username %}
+								<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+								{{ request.user.username }} - تسجيل الخروج
+								{% endif  %} 
+							</a>
+					</span>
+					
+					{% comment %} <div class="topbar-language rs1-select2">
+						<select class="selection-1" name="time">
+							<option>دولار</option>
+							<option>ريال يمني</option>
+						</select>
+					</div> {% endcomment %}
+				</div>
+			</div>
+
+			<div  class="wrap_header">
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+								<a href="/">الصفحة الرئيسية</a>
+							</li>
+							<li>
+								<a href="/shop/">التسوق</a>
+							</li>
+							{% categories %}
+							{% if request.user.is_authenticated %}
+							<li>
+								<a href="{% url 'core:order-summary' %}">
+								<img src="{% static 'images/icons/icon-header-022.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+								عربة التسوق<span class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
+							</li>
+							{% comment %} <li>
+								<a href="{% url 'logout' %}">تسجيل الخروج</a>
+							</li> {% endcomment %}
+							{% comment %} <li class="nav-item">
+								<a class="nav-link" aria-current="page" href="{% url 'department-page' %}">Departments</a>
+							</li> {% endcomment %}
+							{% else %}
+							<li>
+								<a href="#">تسجيل الدخول</a>
+								<ul class="sub_menu">
+									<li><a href="{% url 'login' %}">تسجيل الدخول</a></li>
+									<li><a class="nav-link " href="{% url 'register' %}">تسجيل مستخدم جديد</a></li>
+								</ul>
+							</li>
+							{% endif %}
+						</ul>
+					</nav>
+				</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+					{% comment %} <a href="#" class="header-wrapicon1 dis-block">
+						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+
+					</a>
+					
+					{% endcomment %}
+						<!-- Logo -->
+
+					{% comment %} <span class="linedivide1"></span> {% endcomment %}
+
+					{% comment %} <div class="header-wrapicon2">
+						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti">0</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-01.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											قميص أبيض مع تفاصيل طيات الظهر
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $19.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-02.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											التحويل المظهر الى اللون الاسودConverse All Star Hi Black Canvas
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $39.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-03.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											Nixon Porter Leather Watch In Tan
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $17.00
+										</span>
+									</div>
+								</li>
+							</ul>
+
+							<div class="header-cart-total">
+								الاجمالي: $75.00
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="{% url 'core:order-summary' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										عرض عربة التسوق
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="checkout" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										الدفع
+									</a>
+								</div>
+							</div>
+						</div>
+					</div> {% endcomment %}
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="/" class="logo-mobile">
+				<img src="{% static 'images/icons/logo.png' %}" alt="IMG-LOGO">
+			</a>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu">
+				<!-- Header Icon mobile -->
+				<div class="header-icons-mobile">
+
+						<a href="{% url 'logout' %}" class="header-wrapicon1 dis-block">
+							{% if request.user.username %}
+							<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+							{{ request.user.username }} - تسجيل الخروج
+							{% endif  %} 
+						</a>
+
+
+					<span class="linedivide2"></span>
+
+					{% comment %} <div class="header-wrapicon2">
+						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti">0</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-01.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											قميص مع تفاصيل طيات الظهر
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $19.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-02.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											التحويل المظهر الى اللون الاسود Converse All Star Hi Black Canvas
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $39.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-03.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											Nixon Porter Leather Watch In Tan
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $17.00
+										</span>
+									</div>
+								</li>
+							</ul>
+
+							<div class="header-cart-total">
+								الاجمالي: $75.00
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="{% url 'core:order-summary' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										عرض عربة التسوق
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="checkout" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										الدفع
+									</a>
+								</div>
+							</div>
+						</div>
+					</div> {% endcomment %}
+				</div>
+
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="wrap-side-menu" >
+			<nav class="side-menu">
+				<ul class="main-menu">
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<span class="topbar-child1">
+							<p style="color: black; "><b style="font-size: 22px;">	رياح المحيط   </b>اول سوق الكتروني في اليمن لبيع الاجهزة الطبية</p>
+						</span>
+					</li>
+
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<div class="topbar-child2-mobile">
+
+
+							{% comment %} <div class="topbar-language rs1-select2">
+								<select class="selection-1" name="time">
+									<option>دولار</option>
+									<option>ريال يمني</option>
+								</select>
+							</div> {% endcomment %}
+						</div>
+					</li>
+
+					<li class="item-topbar-mobile p-l-10">
+						<div class="topbar-social-mobile">
+							<a href="#" class="topbar-social-item fa fa-facebook"></a>
+							<a href="#" class="topbar-social-item fa fa-instagram"></a>
+							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+						</div>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="/">الصفحة الرئيسية</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="/shop">تسوق</a>
+					</li>
+
+					{% categories_mobile %}
+
+					{% if request.user.is_authenticated %}
+					<li class="item-menu-mobile">
+						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<a href="{% url 'core:order-summary' %}">عربة التسوق<span class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
+					</li>
+					<li class="item-menu-mobile">
+						<a href="{% url 'logout' %}">تسجيل الخروج</a>
+					</li>
+					{% else %}
+					<li class="item-menu-mobile">
+						<a href="#">تسجيل الدخول</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'login' %}">تسجيل الدخول</a></li>
+							<li><a class="nav-link " href="{% url 'register' %}"> تسجيل مستخدم جديد</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+					{% endif %}
+
+				</ul>
+			</nav>
+		</div>
+	</header>
